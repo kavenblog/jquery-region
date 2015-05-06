@@ -1,13 +1,13 @@
 /**
  * jquery-region - Easily bind countries with linked state/province selection to your form
- * @version v1.0.0
+ * @version v1.0.1
  * @link https://github.com/mdurrant/jquery-region
- * @license MIT
+ * @license 
  */
 
 ;jQuery.extend({
     regionSelector: {
-        prepare: function() {
+        reset: function() {
             jQuery('select[data-region-src="state"]')
                 .empty();
 
@@ -16,7 +16,7 @@
                 .append('<option value=""></option>');
         },
         bind: function() {
-            this.prepare();
+            this.reset();
 
             for (var i in jQRegionSelectorData) {
                 jQuery('select[data-region-src="country"]')
@@ -40,7 +40,7 @@
 
                     for (var i in data.states) {
                         jQuery('select[data-region-src="state"]')
-                            .append('<option>' + states[i] + '</option>');
+                            .append('<option>' + data.states[i] + '</option>');
                     }
                 });
         }
@@ -53,9 +53,9 @@ jQuery(function() {
 
 /**
  * jquery-region - Easily bind countries with linked state/province selection to your form
- * @version v1.0.0
+ * @version v1.0.1
  * @link https://github.com/mdurrant/jquery-region
- * @license MIT
+ * @license 
  */
 
 var jQRegionSelectorData = [
