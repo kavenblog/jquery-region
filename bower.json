@@ -1,0 +1,15 @@
+{
+    "name": "jquery-region",
+    "description": "Easily bind countries with linked state/province selection to your form",
+    "homepage": "https://github.com/mdurrant/jquery-region",
+    "version": "1.0.0",
+    "authors": [
+        "Matt Durrant <mdurrant@gmail.com>"
+    ],
+    "main": [
+        "dist/jquery.region.min.js"
+    ],
+    "dependencies": {
+        "jquery": ">=1.10"
+    }
+}
