@@ -15,13 +15,30 @@
                 .empty()
                 .append('<option value=""></option>');
         },
-        bind: function() {
-            this.reset();
+		bind: function(c, s) {	
+			this.reset();
 
-            for (var i in jQRegionSelectorData) {
-                jQuery('select[data-region-src="country"]')
-                    .append('<option>' + jQRegionSelectorData[i].name + '</option>');
-            }
+            for (var i in jQRegionSelectorData) {          
+				if (jQRegionSelectorData[i].name == c) {
+					jQuery('select[data-region-src="country"]').append("<option selected='selected'>" + jQRegionSelectorData[i].name + "</option>");
+					
+					var data = jQRegionSelectorData[i];
+					
+                    if (data.divider === true) {
+                        continue;
+                    }
+
+                    for (var i in data.states) {
+						if (data.states[i] == s) {
+							jQuery('select[data-region-src="state"]').append("<option selected='selected'>" + data.states[i] + "</option>");
+						} else {
+							jQuery('select[data-region-src="state"]').append("<option>" + data.states[i] + "</option>");
+						}
+                    }
+				} else {
+					jQuery('select[data-region-src="country"]').append("<option>" + jQRegionSelectorData[i].name + "</option>");
+				}
+			}
 
             jQuery('select[data-region-src="country"]')
                 .unbind('change')
@@ -29,6 +46,7 @@
                     jQuery('select[data-region-src="state"]').empty();
 
                     var idx = jQuery(this).prop('selectedIndex');
+
                     if (idx === 0) {
                         return;
                     }
@@ -39,17 +57,22 @@
                     }
 
                     for (var i in data.states) {
-                        jQuery('select[data-region-src="state"]')
-                            .append('<option>' + data.states[i] + '</option>');
+						if (data.states[i] == s) {
+							jQuery('select[data-region-src="state"]').append("<option selected='selected'>" + jQRegionSelectorData[i].name + "</option>");
+						} else {
+							jQuery('select[data-region-src="state"]').append("<option>" + data.states[i] + "</option>");
+						}
                     }
                 });
-        }
+		}
     }
 });
 
-jQuery(function() {
-    jQuery.regionSelector.bind();
-});
+
+jQuery(
+	function(c, s) {jQuery.regionSelector.bind(c, s);}
+);
+
 
 /**
  * jquery-region - Easily bind countries with linked state/province selection to your form
